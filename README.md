@@ -1,8 +1,12 @@
 # kubernetes-iac-proxmox
 
-Terraform automation for deploying a highly available K3s cluster on Proxmox LXC with kube-vip, embedded etcd, and automated container provisioning.
+Terraform automation for deploying a highly available K3s cluster on Proxmox LXC container with kube-vip, embedded etcd, and automated container provisioning.
 
 ## Prerequisites
+- Make sure to download the lxc container templates
+
+  <img width="550" height="226" alt="image" src="https://github.com/user-attachments/assets/6c778819-69ae-4826-871a-9f3d707554b0" />
+
 - Create API token from Datacenter - Permissions - API Tokens. Take note **Token ID** and **Secret**
   
   <img width="680" height="250" alt="image" src="https://github.com/user-attachments/assets/db7592e4-c49a-485d-b881-a14453ee41bf" />
