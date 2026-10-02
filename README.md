@@ -2,6 +2,7 @@
 
 Terraform automation for deploying a highly available K3s cluster on Proxmox LXC with kube-vip, embedded etcd, and automated container provisioning.
 
+## Prerequisites
 - Create API token from Datacenter - Permissions - API Tokens. Take note **Token ID** and **Secret**
   
   <img width="680" height="250" alt="image" src="https://github.com/user-attachments/assets/db7592e4-c49a-485d-b881-a14453ee41bf" />
@@ -33,7 +34,11 @@ Terraform automation for deploying a highly available K3s cluster on Proxmox LXC
   ```
   ssh-copy-id -i ~/.ssh/sshkey root@<PROXMOX_HOST>
   ```
-
+  Try to connect to Proxmox host using sshkey. First connect you need to type yes to trust the server
+  ```
+  ssh -i ~/.ssh/sshkey root@<PROXMOX_HOST>
+  ```
+## Start
 - sa
 
 
