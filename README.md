@@ -1,6 +1,11 @@
-# kubernetes-iac-proxmox
+# Terraform IaC: Highly Available K3s Cluster on Proxmox LXC
 
-Terraform automation for deploying a highly available K3s cluster on Proxmox LXC container with kube-vip, embedded etcd, and automated container provisioning.
+Infrastructure as Code (IaC) project using Terraform to automate the deployment of a highly available K3s Kubernetes cluster on Proxmox LXC containers.
+
+The project automates LXC container provisioning and K3s cluster configuration, including multiple control-plane nodes, kube-vip for a highly available Kubernetes API endpoint and Service LoadBalancer, and embedded etcd for the cluster datastore.
+
+The goal is to provide a reproducible and automated approach to building and managing a K3s HA environment on Proxmox.
+
 
 ## Prerequisites
 - Make sure to download the lxc container templates
@@ -84,12 +89,5 @@ Terraform automation for deploying a highly available K3s cluster on Proxmox LXC
   ```
   terraform apply
   ```
-- Tested in alpine 3.24
-  
-  
-- ss
-
-
-
-
-
+- Tested with Alpine 3.24 lxc container
+  <video src="https://github.com/user-attachments/assets/98cb5433-a521-4d67-8648-886ba2f0c479" controls></video>
