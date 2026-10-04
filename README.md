@@ -76,6 +76,10 @@ The goal is to provide a reproducible and automated approach to building and man
   lxc_net_prefix            = "192.168.31"
   lxc_host_address          = 50
   lxc_gateway               = "192.168.31.1"
+
+  # IP pool for apps 192.168.31.90-192.168.31.100
+  lxc_kubevip_ip_start      = 90
+  lxc_kubevip_ip_end        = 100
   ```  
 - Run this command, it will install bpg/proxmox provider
   ```
