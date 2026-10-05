@@ -18,6 +18,7 @@ locals {
   lxc_disk_size             = 8       # set lxc container disk size in GB
   lxc_mem_dedicated         = 2048    # set lxc container mem size in MB
   lxc_mem_swap              = 0       # set lxc container swap size in MB
+  lxc_protection            = false   # prevent the container itself and its disk for remove/update operations
 
   lxc_unprivileged          = true
   lxc_nesting               = true
@@ -94,6 +95,7 @@ resource "proxmox_virtual_environment_container" "lxc_provisioning" {
   description = "<div align='center'><img src='https://avatars.githubusercontent.com/u/761456?s=120&v=4' alt='Logo' style='width:81px;height:112px;'/><h2>Managed by Terraform</h2> <a href='https://github.com/tobing/kubernetes-iac-proxmox'><img src='https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white' alt='GitHub'></a></div>"
   node_name   = local.proxmox_node_name
   vm_id       = local.lxc_base_id + count.index
+  protection  = local.lxc_protection
 
   # newer linux distributions require unprivileged user namespaces
   unprivileged = local.lxc_unprivileged
