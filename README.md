@@ -9,9 +9,15 @@ The goal is to provide a reproducible and automated approach to building and man
 
 ## Prerequisites
 - Make sure to download the lxc container templates.  
-  I have tested **alpine-3.24-default_20260714_amd64.tar.xz** and **debian-13-standard_13.6-1_amd64.tar.zst**.
+  I have tested    
+  **alpine-3.24-default_20260714_amd64.tar.xz**    
+  **almalinux-10-default_20250930_amd64.tar.xz**        
+  **debian-13-standard_13.6-1_amd64.tar.zst**      
+  **rockylinux-10-default_20251001_amd64.tar.xz**     
+  **ubuntu-26.04-standard_26.04-1_amd64.tar.zst**
 
-  <img width="550" height="226" alt="image" src="https://github.com/user-attachments/assets/6c778819-69ae-4826-871a-9f3d707554b0" />
+  <img width="760" height="270" alt="image" src="https://github.com/user-attachments/assets/a1b2715f-3ca5-49b7-a50b-7edbcab85691" />
+
 
 - Create API token from Datacenter - Permissions - API Tokens. Take note **Token ID** and **Secret**
   
@@ -97,6 +103,17 @@ The goal is to provide a reproducible and automated approach to building and man
 - Running with Alpine 3.24 lxc container
   <video src="https://github.com/user-attachments/assets/98cb5433-a521-4d67-8648-886ba2f0c479" controls></video>
 
+  Rocky Linux
+  <img width="2622" height="405" alt="image" src="https://github.com/user-attachments/assets/98fefe24-3e97-4104-ae6b-41070785760d" />
+  
+
+  Debian Linux
+  <img width="2615" height="398" alt="image" src="https://github.com/user-attachments/assets/39dfefab-e4df-495f-8d33-3cf339f4917a" />
+
+  Ubuntu Linux
+  <img width="2615" height="398" alt="image" src="https://github.com/user-attachments/assets/3d4b408d-3481-4efb-8a6d-a8fedb504636" />
+
+
 > [!NOTE]
 > **Terraform Workflow**
 >
@@ -146,5 +163,8 @@ The goal is to provide a reproducible and automated approach to building and man
   /usr/local/bin/kubectl apply -f https://raw.githubusercontent.com/kube-vip/kube-vip-cloud-provider/main/manifest/kube-vip-cloud-controller.yaml
   /usr/local/bin/kubectl create configmap -n kube-system kubevip --from-literal range-global=${local.lxc_net_prefix}.${local.lxc_kubevip_ip_start}-${local.lxc_net_prefix}.${local.lxc_kubevip_ip_end}
   ```
+
+- **!! Check error during deployment !!**    
+  <img width="1898" height="741" alt="image" src="https://github.com/user-attachments/assets/ac024f4b-eb25-47c9-8f4a-7294944459c5" />
 
 </details>
