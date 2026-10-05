@@ -6,8 +6,16 @@ if command -v apt-get &> /dev/null; then
     apt update && apt upgrade -y && apt install -y curl iptables
 elif command -v dnf &> /dev/null; then
     dnf update -y && dnf install -y curl iptables
+    tee /etc/NetworkManager/conf.d/k3s-cni.conf <<EOF
+[keyfile]
+unmanaged-devices=interface-name:cni0;interface-name:flannel*;interface-name:veth*
+EOF
 elif command -v yum &> /dev/null; then
     yum update -y && yum install -y curl iptables
+    tee /etc/NetworkManager/conf.d/k3s-cni.conf <<EOF
+[keyfile]
+unmanaged-devices=interface-name:cni0;interface-name:flannel*;interface-name:veth*
+EOF
 elif command -v apk &> /dev/null; then
     apk update && apk add curl iptables && \
 
