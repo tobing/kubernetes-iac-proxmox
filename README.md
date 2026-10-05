@@ -30,7 +30,7 @@ The goal is to provide a reproducible and automated approach to building and man
   sysctl -w net.ipv4.ip_forward=1
   ```
 
-  **PERMANENT** 
+  **MAKE IT PERMANENT** 
   ```
   echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/99-ip-forward.conf
   sysctl -p /etc/sysctl.d/99-ip-forward.conf
@@ -94,11 +94,11 @@ The goal is to provide a reproducible and automated approach to building and man
   ```
   terraform apply
   ```
-- Tested with Alpine 3.24 lxc container
+- Running with Alpine 3.24 lxc container
   <video src="https://github.com/user-attachments/assets/98cb5433-a521-4d67-8648-886ba2f0c479" controls></video>
 
 > [!NOTE]
-> **What terraform run?**
+> **Terraform Workflow**
 >
 
 <details>
