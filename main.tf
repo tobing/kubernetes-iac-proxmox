@@ -49,6 +49,7 @@ locals {
   # this will make first lxc container become 192.168.31.50...192.168.31.[50 +  lxc_count.index]
   # Kubevip Virtual IP will be the last one. first control-plane IP + lxc_count. 
   # Index started at 0 so 3 lxc containers control-planes (192.168.31.[50+0]), (192.168.31.[50+1]), (192.168.31.[50+2]). Kubevip (192.168.31.[50+3])
+  # Change these according to your network
   lxc_net_prefix            = "192.168.31"
   lxc_host_address          = 50
   lxc_cidr                  = 24
