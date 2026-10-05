@@ -37,7 +37,7 @@ start() {
     eend 0
 }
 EOF
-
+    sleep 5
     chmod 755 /etc/init.d/cgroups-reparent
     rc-update add cgroups boot
     rc-update add cgroups-reparent boot
