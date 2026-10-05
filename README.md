@@ -107,6 +107,21 @@ The goal is to provide a reproducible and automated approach to building and man
   Ubuntu Linux
   <img width="2615" height="398" alt="image" src="https://github.com/user-attachments/assets/3d4b408d-3481-4efb-8a6d-a8fedb504636" />
 
+- **!! Check error during deployment !!**    
+  <img width="1898" height="741" alt="image" src="https://github.com/user-attachments/assets/ac024f4b-eb25-47c9-8f4a-7294944459c5" />
+  
+- K3s service status showing
+  ```
+  Process: 467 ExecStartPre=/sbin/modprobe br_netfilter (code=exited, status=1/FAILURE)
+  Process: 469 ExecStartPre=/sbin/modprobe overlay (code=exited, status=1/FAILURE)
+  ```
+  lxc container using Proxmox host kernel, so when try to run them it failed. K3s service should be running properly.       
+  Check on Proxmox host
+  ```
+  lsmod | grep overlay && grep CONFIG_BRIDGE_NETFILTER /boot/config-$(uname -r)
+  # overlay               217088  16
+  # CONFIG_BRIDGE_NETFILTER=y
+  ```
 
 > [!NOTE]
 > **Terraform Workflow**
@@ -157,8 +172,5 @@ The goal is to provide a reproducible and automated approach to building and man
   /usr/local/bin/kubectl apply -f https://raw.githubusercontent.com/kube-vip/kube-vip-cloud-provider/main/manifest/kube-vip-cloud-controller.yaml
   /usr/local/bin/kubectl create configmap -n kube-system kubevip --from-literal range-global=${local.lxc_net_prefix}.${local.lxc_kubevip_ip_start}-${local.lxc_net_prefix}.${local.lxc_kubevip_ip_end}
   ```
-
-- **!! Check error during deployment !!**    
-  <img width="1898" height="741" alt="image" src="https://github.com/user-attachments/assets/ac024f4b-eb25-47c9-8f4a-7294944459c5" />
 
 </details>
