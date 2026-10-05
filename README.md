@@ -8,7 +8,8 @@ The goal is to provide a reproducible and automated approach to building and man
 
 
 ## Prerequisites
-- Make sure to download the lxc container templates
+- Make sure to download the lxc container templates.  
+  I have tested **alpine-3.24-default_20260714_amd64.tar.xz** and **debian-13-standard_13.6-1_amd64.tar.zst**.
 
   <img width="550" height="226" alt="image" src="https://github.com/user-attachments/assets/6c778819-69ae-4826-871a-9f3d707554b0" />
 
@@ -53,7 +54,7 @@ The goal is to provide a reproducible and automated approach to building and man
   git clone https://github.com/tobing/kubernetes-iac-proxmox.git
   cd kubernetes-iac-proxmox
   ```
-- Open ```main.tf``` and modify these values
+- Open ```main.tf``` and modify these **IMPORTANT** values
   ```
   # Need to connect to Proxmox host and execute commands
   proxmox_host              = "192.168.31.2"
@@ -95,3 +96,55 @@ The goal is to provide a reproducible and automated approach to building and man
   ```
 - Tested with Alpine 3.24 lxc container
   <video src="https://github.com/user-attachments/assets/98cb5433-a521-4d67-8648-886ba2f0c479" controls></video>
+
+> [!NOTE]
+> **What terraform run?**
+>
+
+<details>
+  
+
+- Make lxc containers less restricted
+
+  ```
+  cat >> /etc/pve/lxc/<CONTAINER_ID>.conf <<'EOF'
+  lxc.apparmor.profile: unconfined
+  lxc.mount.auto: proc:rw sys:rw
+  lxc.mount.entry: /dev/kmsg dev/kmsg none bind,create=file
+  EOF"
+  ```
+- Run [`update_package_containers.sh`](update_package_containers.sh)
+
+- On the first container prepare kube-vip RBAC and run cluster init for K3s
+  ```
+  mkdir -p /var/lib/rancher/k3s/server/manifests/ && curl https://kube-vip.io/manifests/rbac.yaml > /var/lib/rancher/k3s/server/manifests/kube-vip-rbac.yaml
+  /bin/sh -c ' curl -sfL https://get.k3s.io | K3S_TOKEN=${local.lxc_k3s_token} sh -s - server \
+      --disable=servicelb \
+      --cluster-init \
+      --tls-san=${local.lxc_net_prefix}.${local.lxc_host_address + local.lxc_count} '
+  ```
+- On the other containers, wait until cluster init done then set up K3s
+  ```
+  /bin/sh -c ' curl -sfL https://get.k3s.io | K3S_TOKEN=${local.lxc_k3s_token} sh -s - server \
+      --disable=servicelb \
+      --server https://${local.lxc_net_prefix}.${local.lxc_host_address}:6443 \
+      --tls-san=${local.lxc_net_prefix}.${local.lxc_host_address + local.lxc_count} '
+  ```  
+- Prepare [`kubevip-daemonset.yaml`](kubevip-daemonset.yaml) and upload to the first node
+  ```
+  /bin/sh -c 'cat > /etc/rancher/k3s/kubevipdaemonset.yaml'" <<'YAML'
+  ${templatefile("${path.module}/kubevip-daemonset.yaml", {
+    kubevip_version = local.lxc_kubevip_version
+    network_iface   = local.lxc_network_iface
+    vip_address     = "${local.lxc_net_prefix}.${local.lxc_host_address + local.lxc_count}"
+  })}
+  YAML
+  ```
+- On the first node
+  ```
+  /usr/local/bin/kubectl apply -f /etc/rancher/k3s/kubevipdaemonset.yaml
+  /usr/local/bin/kubectl apply -f https://raw.githubusercontent.com/kube-vip/kube-vip-cloud-provider/main/manifest/kube-vip-cloud-controller.yaml
+  /usr/local/bin/kubectl create configmap -n kube-system kubevip --from-literal range-global=${local.lxc_net_prefix}.${local.lxc_kubevip_ip_start}-${local.lxc_net_prefix}.${local.lxc_kubevip_ip_end}
+  ```
+
+</details>
