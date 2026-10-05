@@ -74,6 +74,7 @@ The goal is to provide a reproducible and automated approach to building and man
   proxmox_api_token_id      = "proxmox_token_id" # Token ID after "<user>@<realm>!"
   proxmox_api_token_secret  = "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" # Token secret
 
+  lxc_base_id               = 2000   # set Proxmox CT ID
   lxc_root_password         = "password123" # set root password for container
   lxc_root_public_key       = "/home/myuser/.ssh/sshkey.pub" # PUBLIC KEY. I am using same key as key to connect to proxmox host. You need the private key to connect to container
 
