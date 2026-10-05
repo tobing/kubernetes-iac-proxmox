@@ -10,9 +10,12 @@ The goal is to provide a reproducible and automated approach to building and man
 ## Prerequisites
 - Make sure to download the lxc container templates.  
   I have tested    
-  **alpine-3.24-default_20260714_amd64.tar.xz**        
-  **debian-13-standard_13.6-1_amd64.tar.zst**      
-  **ubuntu-26.04-standard_26.04-1_amd64.tar.zst**
+  - **alpine-3.24-default_20260714_amd64.tar.xz**     
+  - **almalinux-10-default_20250930_amd64.tar.xz**       
+  - **debian-13-standard_13.6-1_amd64.tar.zst**     
+  - **rockylinux-10-default_20251001_amd64.tar.xz**      
+  - **ubuntu-26.04-standard_26.04-1_amd64.tar.zst**
+        
 
   <img width="760" height="270" alt="image" src="https://github.com/user-attachments/assets/a1b2715f-3ca5-49b7-a50b-7edbcab85691" />
 
@@ -101,8 +104,14 @@ The goal is to provide a reproducible and automated approach to building and man
 - Running with Alpine 3.24 lxc container
   <video src="https://github.com/user-attachments/assets/98cb5433-a521-4d67-8648-886ba2f0c479" controls></video>
 
+  Alma Linux
+  <img width="2618" height="392" alt="image" src="https://github.com/user-attachments/assets/e8c4f76f-2055-4c36-b7b9-0bb49ced4f2c" />
+
   Debian Linux
   <img width="2615" height="398" alt="image" src="https://github.com/user-attachments/assets/39dfefab-e4df-495f-8d33-3cf339f4917a" />
+
+  Rocky Linux
+  <img width="2618" height="392" alt="image" src="https://github.com/user-attachments/assets/2d3e60a6-6a25-479a-92ab-30b0177d48bd" />
 
   Ubuntu Linux
   <img width="2615" height="398" alt="image" src="https://github.com/user-attachments/assets/3d4b408d-3481-4efb-8a6d-a8fedb504636" />
