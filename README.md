@@ -6,6 +6,8 @@ The project automates LXC container provisioning and K3s cluster configuration, 
 
 The goal is to provide a reproducible and automated approach to building and managing a K3s HA environment on Proxmox.
 
+Tested on Proxmox 9.2
+
 
 ## Prerequisites
 - Make sure to download the lxc container templates.  
